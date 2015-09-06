@@ -2,9 +2,12 @@ class GroupService
   def self.create(group:, actor:)
     group.creator = actor
     actor.ability.authorize! :create, group
-    group.default_group_cover = DefaultGroupCover.sample if group.is_parent?
+
     group.save && group.mark_as_setup! && group.add_admin!(actor)
-    group.update default_group_cover: DefaultGroupCover.sample if group.is_parent?
+    if group.is_parent?
+      group.update default_group_cover: DefaultGroupCover.sample,
+                   subscription: Subscription.new(kind: :trial)
+    end
     group
   end
 
