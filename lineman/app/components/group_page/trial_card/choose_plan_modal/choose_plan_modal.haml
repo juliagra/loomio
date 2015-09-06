@@ -27,7 +27,7 @@
               %i.fa.fa-check
               {{"choose_plan_modal.email_support" | translate}}
           %p.choose-plan-modal__price{translate: "choose_plan_modal.standard_price_html"}
-          %button.choose-plan-modal__select-button.btn{ng-click: 'chooseStandardPlan()', translate: "choose_plan_modal.select"}
+          %button.choose-plan-modal__select-button.btn{ng-click: 'choosePaidPlan("standard")', translate: "choose_plan_modal.select"}
       .choose-plan-modal__col
         .choose-plan-modal__option
           %h2.lmo-h2{translate: "choose_plan_modal.plus"}
@@ -44,7 +44,7 @@
               {{"choose_plan_modal.usage_statistics" | translate}}
           %p.choose-plan-modal__price{translate: "choose_plan_modal.plus_price_html"}
           .choose-plan-modal__select
-            %button.choose-plan-modal__select-button.btn{translate: "choose_plan_modal.select"}
+            %button.choose-plan-modal__select-button.btn{ng-click: 'choosePaidPlan("plus")', translate: "choose_plan_modal.select"}
 
   .modal-footer.lmo-clearfix
     .row

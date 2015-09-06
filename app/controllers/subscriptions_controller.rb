@@ -16,6 +16,7 @@ class SubscriptionsController < ApplicationController
 
   def subscription_params
     {
+      kind: :paid,
       subscription_id: params[:id],
       creator_id: params[:ref].split(',')[0].split(':')[1]
     }
