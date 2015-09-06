@@ -132,3 +132,15 @@ angular.module('loomioApp').factory 'GroupModel', (BaseModel, AppConfig) ->
 
     uploadPhoto: (file, kind) =>
       @remote.upload("#{@key}/upload_photo/#{kind}", file)
+
+    subscriptionKind: ->
+      if @parentId
+        @parent().subscriptionKind()
+      else
+        @subscription
+
+    subscriptionExpiresAt: ->
+      if @parentId
+        @parent().subscriptionExpiresAt()
+      else
+        @subscriptionExpiresAt

@@ -1,15 +1,9 @@
 class SubscriptionService
 
-  def self.use_gift_subscription(group)
-    group.subscription = Subscription.new(kind: 'gift')
-    group.save!
-    group
-  end
 
-  def self.use_paid_subscription(group)
-    group.subscription = Subscription.new(kind: 'paid')
-    group.save!
-    group
+  def self.create(subscription:, actor:)
+    actor.ability.authorize! :create, subscription
+    subscription.tap(&:save!)
   end
 
 end

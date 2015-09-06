@@ -33,6 +33,10 @@ class GroupSerializer < ActiveModel::Serializer
     object.subscription.try(:kind)
   end
 
+  def subscription_expires_at
+    object.subscription.try(:expires_at)
+  end
+
   def logo_url_medium
     object.logo.url(:medium)
   end

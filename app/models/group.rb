@@ -18,6 +18,7 @@ class Group < ActiveRecord::Base
   validates_inclusion_of :discussion_privacy_options, in: DISCUSSION_PRIVACY_OPTIONS
   validates_inclusion_of :membership_granted_upon, in: MEMBERSHIP_GRANTED_UPON_OPTIONS
   validates :name, length: { maximum: 250 }
+  validates :subscription, absence: true, if: :is_subgroup?
 
   validate :limit_inheritance
   validate :validate_parent_members_can_see_discussions
