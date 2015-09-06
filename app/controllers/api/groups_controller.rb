@@ -1,6 +1,6 @@
 class API::GroupsController < API::RestfulController
   load_and_authorize_resource only: :show, find_by: :key
-  load_resource only: :upload_photo, find_by: :key
+  load_resource only: [:upload_photo, :use_gift_subscription], find_by: :key
 
   def archive
     load_resource
@@ -15,7 +15,7 @@ class API::GroupsController < API::RestfulController
   end
 
   def use_gift_subscription
-    SubscriptionService.use_gift_subscription(resource)
+    SubscriptionService.update(subscription: resource.subscription, params: { kind: :gift }, actor: current_user)
     respond_with_resource
   end
 
