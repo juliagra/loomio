@@ -1,14 +1,23 @@
 class SubscriptionsController < ApplicationController
   def signup_success
-    group_id = params[:ref].split(',')[1].split(':')[1]
-    group = Group.find(group_id)
-    SubscriptionService.use_paid_subscription(group)
-    redirect_to group, started_paid_subscription: true
-    # after signup success on chargify users will be redirected here
-    # lookup group id with params[customer_reference] then save all the params into chargify_response
+    @subscription = SubscriptionService.update(subscription: subscription_from_ref, params: subscription_params, actor: current_user)
+    redirect_to @subscription.group, started_paid_subscription: true
   end
 
   def webhook
+  end
 
+  private
+
+  def subscription_from_ref
+    return unless params[:ref] && group_id = params[:ref].split(',')[1].split(':')[1]
+    @subscription_from_ref ||= Group.find_by(id: group_id).try(:subscription)
+  end
+
+  def subscription_params
+    {
+      subscription_id: params[:id],
+      creator_id: params[:ref].split(',')[0].split(':')[1]
+    }
   end
 end
