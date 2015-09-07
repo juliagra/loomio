@@ -23,3 +23,9 @@ describe 'Subscription flow', ->
       expect(trialCard.confirmGiftPlanText()).toContain('Gift plan selected')
       trialCard.clickConfirmGiftPlanOk()
       expect(trialCard.giftCardText()).toContain('GIFT PLAN')
+
+  describe 'group with expired trial', ->
+
+    it 'displays a trial card telling coordinators their trial has expired', ->
+      testHelper.loadGroupWithExpiredTrial()
+      expect(trialCard.cardText()).toContain("If you'd like to keep using it, you'll need to pick a pricing plan that suits.")

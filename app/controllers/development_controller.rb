@@ -61,6 +61,15 @@ class DevelopmentController < ApplicationController
     redirect_to group_url(test_group)
   end
 
+  def setup_group_with_expired_trial
+    cleanup_database
+    sign_in patrick
+    GroupService.create(group: test_group, actor: current_user)
+    subscription = test_group.subscription
+    subscription.update_attribute :expires_at, 1.day.ago
+    redirect_to group_url(test_group)
+  end
+
   def setup_multiple_discussions
     cleanup_database
     sign_in patrick

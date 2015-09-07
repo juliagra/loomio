@@ -25,7 +25,8 @@ class GroupSerializer < ActiveModel::Serializer
              :has_discussions,
              :has_multiple_admins,
              :archived_at,
-             :subscription_kind
+             :subscription_kind,
+             :subscription_expires_at
 
   has_one :parent, serializer: GroupSerializer, root: 'groups'
 
