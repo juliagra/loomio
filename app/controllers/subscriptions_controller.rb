@@ -10,7 +10,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_from_ref
-    return unless params[:ref] && group_id = param_from_ref[1]
+    return unless params[:ref] && group_id = param_from_ref(1)
     @subscription_from_ref ||= Group.find_by(id: group_id).try(:subscription)
   end
 
@@ -18,7 +18,7 @@ class SubscriptionsController < ApplicationController
     {
       kind: :paid,
       subscription_id: params[:id],
-      creator_id: param_from_ref[0]
+      creator_id: param_from_ref(0)
     }
   end
 
