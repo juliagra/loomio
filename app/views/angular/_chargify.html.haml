@@ -1,0 +1,7 @@
+- if ENV['CHARGIFY_HOST_URL']
+  - @appConfig['chargify'] = {}
+  - @appConfig['chargify']['host'] = ENV['CHARGIFY_HOST_URL']
+
+  - @appConfig['chargify']['plans'] = {}
+  - @appConfig['chargify']['plans']['standard'] = ENV['CHARGIFY_STANDARD_PLAN_PATH']
+  - @appConfig['chargify']['plans']['plus'] = ENV['CHARGIFY_PLUS_PLAN_PATH']
