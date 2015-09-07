@@ -47,7 +47,7 @@ FactoryGirl.define do
       if group.parent.present?
         group.parent.admins << user
       end
-      group.subscription = build(:subscription)
+      group.subscription = build(:subscription) if group.is_parent?
       group.admins << user
       group.save!
     end
