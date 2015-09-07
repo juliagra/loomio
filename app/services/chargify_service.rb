@@ -1,5 +1,9 @@
 class ChargifyService
 
+  def self.available?
+    ENV['CHARGIFY_HOST_URL'].present? && ENV['CHARGIFY_API_KEY'].present?
+  end
+
   def initialize(subscription_id)
     @subscription_id = subscription_id
   end
@@ -12,7 +16,7 @@ class ChargifyService
   private
 
   def chargify_fetch_url
-    "https://loomio-test.chargify.com/subscriptions/#{@subscription_id}.json"
+    "#{ENV['CHARGIFY_HOST_URL']}/subscriptions/#{@subscription_id}.json"
   end
 
   def basic_auth

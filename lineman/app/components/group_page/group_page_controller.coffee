@@ -1,4 +1,4 @@
-angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $routeParams, Records, CurrentUser, ScrollService, MessageChannelService, AbilityService, ModalService, CoverPhotoForm, LogoPhotoForm) ->
+angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $routeParams, Records, CurrentUser, ScrollService, MessageChannelService, AppConfig, AbilityService, ModalService, CoverPhotoForm, LogoPhotoForm) ->
   $rootScope.$broadcast 'currentComponent', {page: 'groupPage'}
 
   Records.groups.findOrFetchById($routeParams.key).then (group) =>
@@ -27,10 +27,10 @@ angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $rout
     AbilityService.canManageMembershipRequests(@group)
 
   @showTrialCard = ->
-    @group.subscriptionKind == 'trial' and AbilityService.canAdministerGroup(@group)
+    @group.subscriptionKind == 'trial' and AbilityService.canAdministerGroup(@group) and AppConfig.chargify?
 
   @showGiftCard = ->
-    @group.subscriptionKind == 'gift'
+    @group.subscriptionKind == 'gift' and AppConfig.chargify?
 
   @canUploadPhotos = ->
     AbilityService.canAdministerGroup(@group)
