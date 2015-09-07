@@ -15,6 +15,10 @@ angular.module('loomioApp').factory 'ChoosePlanModal', ->
 
       $window.location = "#{host}#{path}?#{encodedChargifyParams()}"
 
+    $scope.openIntercom = ->
+      $window.Intercom.public_api.showNewMessage()
+      $scope.$close()
+
     encodedChargifyParams = ->
       params =
         first_name: CurrentUser.firstName()
