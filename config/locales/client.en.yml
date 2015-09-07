@@ -408,7 +408,6 @@ en:
       <p>Donation supported, with no requirement to pay.</p>
     support_html: "I'm happy to <a href=''>talk with you</a> about extending your trial, or with any other questions you may have."
     remind_me_later: Remind me later
-
     gift_donation_ask: We'll ask your group members for a donation.
     unlimited_members: unlimited members
     unlimited_decisions: unlimited decisions
@@ -423,6 +422,13 @@ en:
       <strong>$179</strong>/month<br><span>or</span> $1790/year
     select: Select
 
+  subscription_success_modal:
+    heading: Thanks for setting up your subscription!
+    body_html: |
+      <p>You'll get an email with a receipt.</p>
+      <p>Give us a yell if you ever want to change or cancel your subscription.</p>
+      <p>Nice doing business with you.</>
+    ok_got_it: 'Ok, got it!'
 
   edit_group_form:
     title: 'Edit Group Settings'
