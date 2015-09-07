@@ -10,7 +10,8 @@ class SubscriptionService
 
     case params[:kind].try(:to_sym)
     when :paid
-      return unless params[:creator_id].to_i == actor.id && json = ChargifyService.new(params[:subscription_id]).fetch!
+      raise CanCan::AccessDenied.new unless params[:creator_id].to_i == actor.id && json = ChargifyService.new(params[:subscription_id]).fetch!
+
       subscription.update kind:                     params[:kind],
                           chargify_subscription_id: params[:subscription_id],
                           plan:                     json['product']['handle'],

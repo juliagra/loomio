@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   def signup_success
-    @subscription = SubscriptionService.update(subscription: subscription_from_ref, params: subscription_params, actor: current_user)
+    @subscription = SubscriptionService.update(subscription: group_from_ref.subscription, params: subscription_params, actor: current_user)
     redirect_to @subscription.group, started_paid_subscription: true
   end
 
@@ -9,9 +9,8 @@ class SubscriptionsController < ApplicationController
 
   private
 
-  def subscription_from_ref
-    return unless params[:ref] && group_id = param_from_ref(1)
-    @subscription_from_ref ||= Group.find_by(id: group_id).try(:subscription)
+  def group_from_ref
+    @group_from_ref ||= Group.find(param_from_ref(1))
   end
 
   def subscription_params

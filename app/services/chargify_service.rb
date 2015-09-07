@@ -5,7 +5,8 @@ class ChargifyService
   end
 
   def fetch!
-    @json ||= JSON.parse(HTTParty.get(chargify_fetch_url, basic_auth: basic_auth).body)['subscription']
+    response = JSON.parse HTTParty.get(chargify_fetch_url, basic_auth: basic_auth).body
+    response['subscription'] if response.present?
   end
 
   private
