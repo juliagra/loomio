@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_service
-    @subscription_service ||= SubscriptionService.new(group_from_reference)
+    @subscription_service ||= SubscriptionService.new(group_from_reference, group_from_reference.creator)
   end
 
   def subscription_params

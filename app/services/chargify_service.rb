@@ -1,7 +1,7 @@
 class ChargifyService
 
   def self.available?
-    ENV['CHARGIFY_HOST_URL'].present? && ENV['CHARGIFY_API_KEY'].present?
+    ENV['CHARGIFY_APP_NAME'].present? && ENV['CHARGIFY_API_KEY'].present?
   end
 
   def initialize(subscription_id)
@@ -26,7 +26,7 @@ class ChargifyService
   private
 
   def chargify_api_endpoint
-    "#{ENV['CHARGIFY_HOST_URL']}subscriptions/#{@subscription_id}.json"
+    "http://#{ENV['CHARGIFY_APP_NAME']}.chargify.com/subscriptions/#{@subscription_id}.json"
   end
 
   def basic_auth

@@ -1,7 +1,7 @@
 class SubscriptionService
 
-  def initialize(group)
-    raise 'no subscription found on this group!'   unless group.subscription
+  def initialize(group, actor)
+    actor.ability.authorize! :choose_subscription_plan, group
     @subscription = group.subscription
   end
 

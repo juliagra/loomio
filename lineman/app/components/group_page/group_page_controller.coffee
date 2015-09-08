@@ -1,4 +1,4 @@
-angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $routeParams, Records, CurrentUser, ScrollService, MessageChannelService, AppConfig, AbilityService, ModalService, CoverPhotoForm, LogoPhotoForm) ->
+angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $routeParams, $location, Records, CurrentUser, ScrollService, MessageChannelService, AppConfig, AbilityService, ModalService, CoverPhotoForm, LogoPhotoForm, SubscriptionSuccessModal) ->
   $rootScope.$broadcast 'currentComponent', {page: 'groupPage'}
 
   Records.groups.findOrFetchById($routeParams.key).then (group) =>
@@ -8,6 +8,8 @@ angular.module('loomioApp').controller 'GroupPageController', ($rootScope, $rout
     $rootScope.$broadcast 'setTitle', @group.fullName()
     $rootScope.$broadcast 'analyticsSetGroup', @group
     MessageChannelService.subscribeTo("/group-#{@group.key}")
+    if AppConfig.chargify and $location.search().chargify_success?
+      ModalService.open SubscriptionSuccessModal
   , (error) ->
     $rootScope.$broadcast('pageError', error)
 

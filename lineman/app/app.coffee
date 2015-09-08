@@ -70,7 +70,6 @@ angular.module('loomioApp').controller 'ApplicationController', ($scope, $filter
     {path: '/m/:key/', component: 'proposalRedirect' },
     {path: '/m/:key/:stub', component: 'proposalRedirect' },
     {path: '/m/:key/votes/new', component: 'proposalRedirect' },
-    {path: '/g/:key/subscription', component: 'subscriptionPage'},
     {path: '/g/:key/memberships', component: 'membershipsPage'},
     {path: '/g/:key/membership_requests', component: 'membershipRequestsPage'},
     {path: '/g/:key', component: 'groupPage' },

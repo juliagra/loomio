@@ -1,6 +1,6 @@
 class API::GroupsController < API::RestfulController
   load_and_authorize_resource only: :show, find_by: :key
-  load_resource only: [:upload_photo, :use_gift_subscription], find_by: :key
+  load_resource only: [:upload_photo, :use_gift_subscription, :change_subscription], find_by: :key
 
   def archive
     load_resource
@@ -15,7 +15,16 @@ class API::GroupsController < API::RestfulController
   end
 
   def use_gift_subscription
-    SubscriptionService.update(subscription: resource.subscription, params: { kind: :gift }, actor: current_user)
+    subscription_service.start_gift!
+    respond_with_resource
+  end
+
+  def change_subscription
+    if params[:plan].try(:to_sym) == :gift
+      subscription_service.end_subscription!
+    else
+      subscription_service.change_plan! params[:plan]
+    end
     respond_with_resource
   end
 
@@ -26,6 +35,10 @@ class API::GroupsController < API::RestfulController
   end
 
   private
+
+  def subscription_service
+    @service ||= SubscriptionService.new(resource, current_user)
+  end
 
   def ensure_photo_params
     params.require(:file)
