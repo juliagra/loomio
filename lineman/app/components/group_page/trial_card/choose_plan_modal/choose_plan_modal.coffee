@@ -20,7 +20,7 @@ angular.module('loomioApp').factory 'ChoosePlanModal', ->
         last_name: CurrentUser.lastName()
         email: CurrentUser.email
         organization: $scope.group.name
-        reference: "userId:#{CurrentUser.id},groupId:#{$scope.group.id}"
+        reference: $scope.group.key
 
       _.map(_.keys(params), (key) ->
         encodeURIComponent(key) + "=" + encodeURIComponent(params[key])

@@ -9,14 +9,24 @@ class ChargifyService
   end
 
   def fetch!
-    response = JSON.parse HTTParty.get(chargify_fetch_url, basic_auth: basic_auth).body
+    response = JSON.parse HTTParty.get(chargify_api_endpoint, basic_auth: basic_auth).body
+    response['subscription'] if response.present?
+  end
+
+  def cancel!
+    response = JSON.parse HTTParty.delete(chargify_api_endpoint, basic_auth: basic_auth).body
+    response['subscription'] if response.present?
+  end
+
+  def change_plan!(product_handle)
+    response = JSON.parse HTTParty.put(chargify_api_endpoint, body: { subscription: { product_handle: product_handle } }, basic_auth: basic_auth).body
     response['subscription'] if response.present?
   end
 
   private
 
-  def chargify_fetch_url
-    "#{ENV['CHARGIFY_HOST_URL']}/subscriptions/#{@subscription_id}.json"
+  def chargify_api_endpoint
+    "#{ENV['CHARGIFY_HOST_URL']}subscriptions/#{@subscription_id}.json"
   end
 
   def basic_auth

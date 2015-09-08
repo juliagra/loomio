@@ -182,8 +182,7 @@ Loomio::Application.routes.draw do
   end
 
   namespace :subscriptions do
-    get 'signup_success'
-    get 'webhook'
+    post :webhook
   end
 
   resources :invitations, only: [:show, :create, :destroy]

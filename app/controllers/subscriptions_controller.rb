@@ -1,27 +1,25 @@
 class SubscriptionsController < ApplicationController
-  def signup_success
-    @subscription = SubscriptionService.update(subscription: group_from_ref.subscription, params: subscription_params, actor: current_user)
-    redirect_to @subscription.group, started_paid_subscription: true
-  end
 
   def webhook
+    case params[:event].try(:to_sym)
+    when :signup_success              then subscription_service.start_subscription!(subscription_params['id'].to_i)
+    when :subscription_product_change then subscription_service.change_plan!(subscription_params['product']['handle'])
+    when :subscription_state_change   then subscription_service.end_subscription! if subscription_params['state'] == 'canceled'
+    end
+    head :ok
   end
 
   private
 
-  def group_from_ref
-    @group_from_ref ||= Group.find(param_from_ref(1))
+  def subscription_service
+    @subscription_service ||= SubscriptionService.new(group_from_reference)
   end
 
   def subscription_params
-    {
-      kind: :paid,
-      subscription_id: params[:id],
-      creator_id: param_from_ref(0)
-    }
+    @subscription_params ||= params['payload']['subscription']
   end
 
-  def param_from_ref(index)
-    params[:ref].split(',')[index].split(':')[1]
+  def group_from_reference
+    @group_from_reference ||= Group.find(subscription_params['customer']['reference'])
   end
 end
