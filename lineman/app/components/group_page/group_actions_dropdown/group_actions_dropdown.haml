@@ -15,7 +15,7 @@
           .dropdown-menu-item-label{translate: 'group_page.options.manage_members'}
         .dropdown-menu-item-details
       %li.dropdown-menu-item{ng-if: 'groupActions.canManageGroupSubscription()'}
-        %a.group-page-actions__manage-subscription-link
+        %a.group-page-actions__manage-subscription-link{lmo-href-for: 'group', lmo-href-action: 'subscription'}
           .dropdown-menu-item-label{translate: 'group_page.options.manage_subscription'}
         .dropdown-menu-item-details
       %li.dropdown-menu-item

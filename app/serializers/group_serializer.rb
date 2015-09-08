@@ -26,12 +26,17 @@ class GroupSerializer < ActiveModel::Serializer
              :has_multiple_admins,
              :archived_at,
              :subscription_kind,
+             :subscription_plan,
              :subscription_expires_at
 
   has_one :parent, serializer: GroupSerializer, root: 'groups'
 
   def subscription_kind
     object.subscription.try(:kind)
+  end
+
+  def subscription_plan
+    object.subscription.try(:plan)
   end
 
   def subscription_expires_at

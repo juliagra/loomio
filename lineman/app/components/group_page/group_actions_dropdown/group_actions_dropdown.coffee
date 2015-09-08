@@ -13,7 +13,7 @@ angular.module('loomioApp').directive 'groupActionsDropdown', ->
       AbilityService.canEditGroup($scope.group)
 
     @canManageGroupSubscription = ->
-      $scope.group.subscriptionKind == 'paid' and @canAdministerGroup
+      $scope.group.subscriptionKind != 'trial' and @canAdministerGroup()
 
     @canArchiveGroup = =>
       AbilityService.canArchiveGroup($scope.group)
