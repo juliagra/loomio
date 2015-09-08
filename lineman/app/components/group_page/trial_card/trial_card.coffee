@@ -5,14 +5,8 @@ angular.module('loomioApp').directive 'trialCard', ->
   replace: true
   controller: ($scope, ModalService, ChoosePlanModal) ->
 
-    $scope.showCard = ->
-      _.includes ['gift', 'trial'], $scope.group.subscriptionKind
-
     $scope.isExpired = ->
-      if moment().isAfter($scope.group.subscriptionExpiresAt)
-        true
-      else
-        false
+      moment().isAfter($scope.group.subscriptionExpiresAt)
 
     $scope.choosePlan = ->
       ModalService.open ChoosePlanModal, group: -> $scope.group
