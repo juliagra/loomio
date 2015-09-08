@@ -17,7 +17,7 @@ class SubscriptionService
   def start_subscription!(subscription_id)
     return true if @subscription.chargify_subscription_id == subscription_id
     raise 'unable to fetch subscription' unless    chargify_subscription = chargify_service(subscription_id).fetch!
-    @subscription.update_column :trial_ended_at,   Time.zone.now if @subscription.kind == 'trial'
+    @subscription.update_column :trial_ended_at,   chargify_subscription['activated_at'] if @subscription.kind == 'trial'
     @subscription.update kind:                     :paid,
                          activated_at:             chargify_subscription['activated_at'],
                          expires_at:               chargify_subscription['expires_at'],
