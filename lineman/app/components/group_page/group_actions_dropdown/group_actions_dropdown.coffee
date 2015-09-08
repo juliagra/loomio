@@ -28,6 +28,6 @@ angular.module('loomioApp').directive 'groupActionsDropdown', ->
       ModalService.open ArchiveGroupForm, group: -> $scope.group
 
     @manageSubscriptionsLink = ->
-      "http://billingportal.com/s/#{AppConfig.chargify.appName}"
+      "https://www.billingportal.com/s/#{AppConfig.chargify.appName}/login/magic"
 
     return
