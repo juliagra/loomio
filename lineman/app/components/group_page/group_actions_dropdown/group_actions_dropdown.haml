@@ -15,7 +15,9 @@
           .dropdown-menu-item-label{translate: 'group_page.options.manage_members'}
         .dropdown-menu-item-details
       %li.dropdown-menu-item{ng-if: 'groupActions.canManageGroupSubscription()'}
-        %a.group-page-actions__manage-subscription-link{ng-href: '{{groupActions.manageSubscriptionsLink()}}'}
+        %a.group-page-actions__manage-subscription-link{ng-if: 'group.subscriptionKind == "paid"', ng-href: '{{groupActions.manageSubscriptionsLink()}}'}
+          .dropdown-menu-item-label{translate: 'group_page.options.manage_subscription'}
+        %a.group-page-actions__manage-subscription-link{ng-if: 'group.subscriptionKind == "gift"', ng-click: 'groupActions.choosePlan()'}
           .dropdown-menu-item-label{translate: 'group_page.options.manage_subscription'}
         .dropdown-menu-item-details
       %li.dropdown-menu-item

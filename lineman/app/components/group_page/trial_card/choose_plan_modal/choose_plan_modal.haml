@@ -12,7 +12,7 @@
           %h2.lmo-h2{translate: "choose_plan_modal.gift"}
           .blank{translate: "choose_plan_modal.gift_body_html"}
           %p.choose-plan-modal__gift-price{translate: "choose_plan_modal.gift_donation_ask"}
-          %button.choose-plan-modal__select-button.choose-plan-modal__select-button--gift.btn{ng-click: 'chooseGiftPlan()', translate: "choose_plan_modal.select"}
+          %button.choose-plan-modal__select-button.choose-plan-modal__select-button--gift.btn{ng-disabled: 'group.subscriptionKind == "gift"', ng-click: 'chooseGiftPlan()', translate: "choose_plan_modal.select"}
       .choose-plan-modal__col
         .choose-plan-modal__option.choose-plan-modal__option--standard
           %h2.lmo-h2{translate: "choose_plan_modal.standard"}
