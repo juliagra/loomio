@@ -38,3 +38,15 @@ describe 'Subscription flow', ->
       # groupsHelper.visitGroupsPage()
       # groupsHelper.visitFirstGroup()
       # expect(trialCard.choosePlanModalText().isPresent()).toBe(false)
+
+  describe 'group on paid plan', ->
+
+    beforeEach ->
+      testHelper.loadGroupOnPaidPlan()
+
+    it 'does not display the trial card', ->
+      expect(trialCard.card().isPresent()).toBe(false)
+
+    it 'lets coordinators manage their subscription', ->
+      groupsHelper.openMemberOptionsDropdown()
+      expect(trialCard.manageSubscriptionLink().isPresent()).toBe(true)

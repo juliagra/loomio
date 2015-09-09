@@ -79,6 +79,15 @@ class DevelopmentController < ApplicationController
     redirect_to group_url(test_group)
   end
 
+  def setup_group_on_paid_plan
+    cleanup_database
+    GroupService.create(group: test_group, actor: patrick)
+    sign_in patrick
+    subscription = test_group.subscription
+    subscription.update_attribute :kind, 'paid'
+    redirect_to group_url(test_group)
+  end
+
   def setup_multiple_discussions
     cleanup_database
     sign_in patrick

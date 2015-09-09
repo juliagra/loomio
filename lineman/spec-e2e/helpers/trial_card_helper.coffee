@@ -26,3 +26,6 @@ module.exports = new class TrialCardHelper
 
   clickRemindMeLater: ->
     element(By.css('.choose-plan-modal__cancel')).click()
+
+  manageSubscriptionLink: ->
+    element(By.css('.group-page-actions__manage-subscription-link'))

@@ -10,3 +10,6 @@ module.exports = new class TestHelper
 
   loadGroupWithOverdueTrial: ->
     browser.get('http://localhost:8000/development/setup_group_with_overdue_trial')
+
+  loadGroupOnPaidPlan: ->
+    browser.get('http://localhost:8000/development/setup_group_on_paid_plan')
