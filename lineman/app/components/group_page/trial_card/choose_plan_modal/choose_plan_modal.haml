@@ -3,7 +3,8 @@
     %button{type: 'button', class: 'close', ng-click: '$close()'}
       %span{aria-hidden: 'true'} &times;
       %span.sr-only{translate: 'common.action.cancel'}
-    %h1.lmo-h1.modal-title{translate: 'choose_plan_modal.heading'}
+    %h1.lmo-h1.modal-title{ng-if: '!group.trialIsOverdue()', translate: 'choose_plan_modal.heading'}
+    %h1.lmo-h1.modal-title{ng-if: 'group.trialIsOverdue()', translate: 'choose_plan_modal.overdue_heading'}
 
   .modal-body
     .choose-plan-modal__pricing-table

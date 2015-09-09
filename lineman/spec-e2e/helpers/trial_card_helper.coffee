@@ -20,3 +20,9 @@ module.exports = new class TrialCardHelper
 
   giftCardText: ->
     element(By.css('.gift-card')).getText()
+
+  choosePlanModalText: ->
+    element(By.css('.choose-plan-modal')).getText()
+
+  clickRemindMeLater: ->
+    element(By.css('.choose-plan-modal__cancel')).click()

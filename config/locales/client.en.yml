@@ -398,6 +398,7 @@ en:
 
   choose_plan_modal:
     heading: 'Choose your pricing plan'
+    overdue_heading: 'To continue using Loomio, please choose a payment plan'
     gift: Gift
     standard: Standard
     plus: Plus
