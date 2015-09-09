@@ -3,4 +3,8 @@ angular.module('loomioApp').directive 'giftCard', ->
   restrict: 'E'
   templateUrl: 'generated/components/group_page/gift_card/gift_card.html'
   replace: true
-  controller: ($scope) ->
+  controller: ($scope, $window, AppConfig) ->
+
+    $scope.makeDonation = ->
+      $window.open("#{AppConfig.chargify.donation_url}", '_blank')
+      return true # throws an exception without this line
