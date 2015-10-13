@@ -39,8 +39,11 @@ Webhooks::Slack::Base = Struct.new(:event) do
 
   def user_vote_field
     {
-      title: "Add your vote on this proposal",
-      value: "yes, no, abstain, block."
+      title: "Vote on this proposal",
+      value: "#{vote_proposal_link(eventable, "yes")} · " +
+             "#{vote_proposal_link(eventable, "abstain")} · " +
+             "#{vote_proposal_link(eventable, "no")} · " +
+             "#{vote_proposal_link(eventable, "block")}"
     }
   end
 
@@ -59,6 +62,18 @@ Webhooks::Slack::Base = Struct.new(:event) do
   def discussion_link(text = nil, params = {})
     "<#{discussion_url(eventable.discussion, params)}|#{text || eventable.discussion.title}>"
   end
+
+  ## Adding methods for votes
+
+  def vote_proposal_link(vote, position = nil)
+    vote_discussion_link position || vote.motion_name, { proposal: vote.proposal.key, position: vote.position }
+  end 
+
+  def vote_discussion_link(text = nil, params = {})
+    "<#{discussion_url(eventable.motion.discussion, params)}|#{text || eventable.motion.discussion.title}>"
+  end
+
+  ###
 
   def eventable
     @eventable ||= event.eventable

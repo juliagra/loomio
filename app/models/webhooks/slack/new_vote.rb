@@ -1,7 +1,7 @@
 class Webhooks::Slack::NewVote < Webhooks::Slack::Base
 
 	def text
-		I18n.t :"webhooks.slack.new_vote", author: author.name, position: eventable.position
+		I18n.t :"webhooks.slack.new_vote", author: author.name, position: eventable.position, name: vote_discussion_link
 	end
 
 	def attachment_fallback
@@ -9,7 +9,7 @@ class Webhooks::Slack::NewVote < Webhooks::Slack::Base
 	end
 
 	def attachment_title
-		"A proposal..."
+		vote_proposal_link(eventable)
 	end
 
 	def attachment_text
